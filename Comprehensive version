@@ -1,0 +1,86 @@
+import sys
+from fractions import Fraction
+def intinput(a):
+    t=''
+    for i in a:
+        if '0'<=i<='9':
+            t+=i
+    if len(t)==0:
+        print('ERROR')
+        return intinput(input())
+    return int(t)
+
+def pow(x,y):
+    if y<2:
+        return x**y
+    t=pow(x,y//2)
+    if y%2:
+        return t*t*x
+    else:
+        return t*t
+    
+def definite_integral():
+    n=int(input('degree:'))
+    m=[]
+    for i in range(n,0,-1):
+        q=int(input(f'x^{i}:'))
+        m.append(Fraction(q,i+1))
+    m.append(Fraction(int(input('x^0:')),1))
+    st,ed=map(int,input("st,ed:").split())
+    res=0
+    for i in range(n+1):
+        res+=(pow(ed,(n+1-i)))*m[i]
+        res-=(pow(st,(n+1-i)))*m[i]
+    print(res)
+
+def differential():
+    n=int(input('degree:'))
+    m=[]
+    for i in range(n,0,-1):
+        q=int(input(f'x^{i}:'))
+        m.append(q)
+    m.append(int(input('x^0:')))
+    res=0
+    for i in range(n-1):
+        if i==0:
+            print(f'{m[i]*(n-i)}*x^{n-i-1}',end='')
+        elif m[i]==0:
+            continue
+        elif m[i]>0:
+            print(f'+{m[i]*(n-i)}*x^{n-i-1}',end='')
+        else:
+            print(f'{m[i]*(n-i)}*x^{n-i-1}',end='')
+    if m[-2]>0:
+        print(f'+{m[-2]}')
+    elif m[-2]<0:
+        print(f'{m[-2]}')
+def indefinite_integral():
+    n=int(input('degree:'))
+    m=[]
+    for i in range(n,0,-1):
+        q=int(input(f'x^{i}:'))
+        m.append(Fraction(q,i+1))
+    m.append(Fraction(int(input('x^0:')),1))
+    res=0
+    for i in range(n+1):
+        if i==0:
+            print(f'{m[i]}*x^{n+1-i}',end=' ')
+        elif m[i]==0:
+            continue
+        elif m[i]>0:
+            print(f'+{m[i]}*x^{n+1-i}',end=' ')
+        else:
+            print(f'{m[i]}*x^{n+1-i}',end=' ')
+    print('+C')
+
+while True:
+    print('1:differential 2:indefinite_integral 3:definite_integral')
+    n=intinput(input())
+    if n==1:
+        differential()
+    elif n==2:
+        indefinite_integral()
+    elif n==3:
+        definite_integral()
+    else:
+        print("ERROR")

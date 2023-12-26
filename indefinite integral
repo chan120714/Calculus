@@ -1,0 +1,17 @@
+from fractions import Fraction
+while True:
+    n=int(input())
+    m=[]
+    for i in range(n,0,-1):
+        q=int(input(f'x^{i}:'))
+        m.append(Fraction(q,i+1))
+    m.append(Fraction(int(input('x^0:')),1))
+    res=0
+    for i in range(n+1):
+        if i==0:
+            print(f'{m[i]}*x^{n+1-i}',end='')
+        elif m[i]>0:
+            print(f'+{m[i]}*x^{n+1-i}',end='')
+        else:
+            print(f'{m[i]}*x^{n+1-i}',end='')
+    print('+C')

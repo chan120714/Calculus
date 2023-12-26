@@ -9,9 +9,11 @@ while True:
     res=0
     for i in range(n+1):
         if i==0:
-            print(f'{m[i]}*x^{n+1-i}',end='')
+            print(f'{m[i]}*x^{n+1-i}',end=' ')
+        elif m[i]==0:
+            continue
         elif m[i]>0:
-            print(f'+{m[i]}*x^{n+1-i}',end='')
+            print(f'+{m[i]}*x^{n+1-i}',end=' ')
         else:
-            print(f'{m[i]}*x^{n+1-i}',end='')
+            print(f'{m[i]}*x^{n+1-i}',end=' ')
     print('+C')

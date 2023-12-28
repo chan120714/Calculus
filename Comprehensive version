@@ -23,10 +23,17 @@ def definite_integral():
     n=int(input('degree:'))
     m=[]
     for i in range(n,0,-1):
-        q=int(input(f'x^{i}:'))
-        m.append(Fraction(q,i+1))
-    m.append(Fraction(int(input('x^0:')),1))
-    st,ed=map(int,input("st,ed:").split())
+        q=list(map(int,input(f'x^{i}:').split('/')))
+        if len(q)==1:
+            m.append(Fraction(q[0],i+1))
+        else:
+            m.append(Fraction(q[0],(i+1)*q[1]))
+    q=list(map(int,input(f'x^0:').split('/')))
+    if len(q)==1:
+        m.append(Fraction(q[0],1))
+    else:
+        m.append(Fraction(q[0],q[1]))
+    st,ed=map(int,input("st,ed:(integer)").split())
     res=0
     for i in range(n+1):
         res+=(pow(ed,(n+1-i)))*m[i]
@@ -37,10 +44,16 @@ def differential():
     n=int(input('degree:'))
     m=[]
     for i in range(n,0,-1):
-        q=int(input(f'x^{i}:'))
-        m.append(q)
-    m.append(int(input('x^0:')))
-    res=0
+        q=list(map(int,input(f'x^{i}:').split('/')))
+        if len(q)==1:
+            m.append(Fraction(q[0],1))
+        else:
+            m.append(Fraction(q[0],q[1]))
+    q=list(map(int,input(f'x^0:').split('/')))
+    if len(q)==1:
+        m.append(Fraction(q[0],1))
+    else:
+        m.append(Fraction(q[0],q[1]))
     for i in range(n-1):
         if i==0:
             print(f'{m[i]*(n-i)}*x^{n-i-1}',end='')
@@ -58,9 +71,16 @@ def indefinite_integral():
     n=int(input('degree:'))
     m=[]
     for i in range(n,0,-1):
-        q=int(input(f'x^{i}:'))
-        m.append(Fraction(q,i+1))
-    m.append(Fraction(int(input('x^0:')),1))
+        q=list(map(int,input(f'x^{i}:').split('/')))
+        if len(q)==1:
+            m.append(Fraction(q[0],i+1))
+        else:
+            m.append(Fraction(q[0],(i+1)*q[1]))
+    q=list(map(int,input(f'x^0:').split('/')))
+    if len(q)==1:
+        m.append(Fraction(q[0],1))
+    else:
+        m.append(Fraction(q[0],q[1]))
     res=0
     for i in range(n+1):
         if i==0:
